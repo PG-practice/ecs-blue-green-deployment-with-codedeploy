@@ -291,7 +291,7 @@ Resources:
         Image: aws/codebuild/standard:3.0
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
-            Value: !Ref "AWS::REGION"
+            Value: !Ref "AWS::Region"
           - Name: TEMPLATE_BUCKET
             Value: !Ref rCodePipelineArtifactBucket
       TimeoutInMinutes: 60
@@ -341,7 +341,7 @@ Resources:
         PrivilegedMode: true
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
-            Value: !Ref "AWS::REGION"
+            Value: !Ref "AWS::Region"
           - Name: S3_BUCKET
             Value: !Ref rCodePipelineArtifactBucket
           - Name: REPOSITORY_URI
