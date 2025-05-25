@@ -385,7 +385,7 @@ Resources:
                 # Create appspec.yml for CodeDeploy deployment
                 - python iac/code-deploy/scripts/update-appspec.py --taskArn ${TASKDEF_ARN} --hooksLambdaArn ${HOOKS_LAMBDA_ARN} --inputAppSpecFile 'iac/code-deploy/appspec.yml' --outputAppSpecFile '/tmp/appspec.yml'
                 # Create taskdefinition for CodeDeploy deployment
-                - aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} --region ${AWS_REGION} --query taskDefinition >> taskdef.json
+                - aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} --region ${AWS_REGION} --query taskDefinition >> /tmp/taskdef.json
           artifacts:
             files:
               - /tmp/appspec.yml
@@ -474,7 +474,6 @@ Resources:
                 Capabilities: CAPABILITY_NAMED_IAM
                 RoleArn: !GetAtt rCloudFormationServiceRole.Arn
                 StackName: !Sub ${pApplicationName}-infra-stack
-                OutputFileName: InfraStackOutput.json
                 TemplateConfiguration: PackagedCFNOutput::iac/app/params/ecs-bg-params.json
                 TemplatePath: PackagedCFNOutput::iac/app/ecs-bg-packaged.yaml
                 ParameterOverrides: |
